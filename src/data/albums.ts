@@ -18,15 +18,15 @@ export interface Album {
 
 export const albums: Album[] = [
   {
-    id: "midnight-currents",
-    title: "Midnight Currents",
-    artist: "Nova Drift",
-    rating: 8.7,
-    cover: album1,
-    genre: "Electronic",
-    releaseYear: 2024,
+    id: "Christopher_cross",
+    title: "Christopher Cross",
+    artist: "Christopher Cross",
+    rating: 8.4,
+    cover: Christopher_cross,
+    genre: "Soft Rock",
+    releaseYear: 1979,
     review:
-      "A mesmerizing journey through layers of pulsing synths and oceanic bass. Nova Drift pushes the boundaries of electronic music with this deeply atmospheric record. Every track feels like diving deeper into an endless, glowing ocean. The production is immaculate — each texture placed with surgical precision yet the whole thing breathes with organic warmth. Standout tracks 'Deep Blue Protocol' and 'Current III' showcase a masterful command of tension and release.",
+      "Sounds attractive, far more attractive than Chris physically. A beautiful project with little to no fluff. Cross's voice carries naturally and gently even on more intense tracks like 'Ride Like the Wind'. A very dynamic album. Instrumentation is consistent. Michael McDonald's backing voices dancing across the project enhanced the quality. His influence is equally tangible in the album's production choices. Two of the best voices in soft rock, a serene and massively successful album.",
   },
   {
     id: "golden-hour-fading",
