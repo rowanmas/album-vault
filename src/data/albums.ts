@@ -1,7 +1,7 @@
-import album1 from "@/assets/albums/album1.jpg";
-import album2 from "@/assets/albums/album2.jpg";
-import album3 from "@/assets/albums/album3.jpg";
-import album4 from "@/assets/albums/album4.jpg";
+import album1 from "@/assets/albums/Christopher_cross.jpg";
+import album2 from "@/assets/albums/Swv_newbeginning.jpg";
+import album3 from "@/assets/albums/Mama's_Gun.jpg";
+import album4 from "@/assets/albums/gapband_live.jpg";
 import album5 from "@/assets/albums/album5.jpg";
 import album6 from "@/assets/albums/album6.jpg";
 
