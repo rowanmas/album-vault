@@ -174,7 +174,7 @@ const AlbumPage = () => {
               </div>
               {avgRating !== null && (
                 <p className="font-body text-sm text-muted-foreground mt-4">
-                  Average user rating: <span className="text-rating font-display text-lg">{avgRating.toFixed(1)}</span> ({totalRatings} {totalRatings === 1 ? "rating" : "ratings"})
+                  Average user rating: <span className="font-display text-lg font-extrabold" style={{ color: getRatingColor(avgRating) }}>{avgRating.toFixed(1)}</span> ({totalRatings} {totalRatings === 1 ? "rating" : "ratings"})
                 </p>
               )}
             </div>
