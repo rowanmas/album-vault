@@ -6,6 +6,7 @@ import logo from "@/assets/logo.png";
 import { albums } from "@/data/albums";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import { getRatingColor } from "@/lib/ratingColor";
 
 const Index = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -142,7 +143,10 @@ const Index = () => {
                 <p className="font-body text-xs text-muted-foreground truncate">
                   {album.artist}
                 </p>
-                <p className="font-display text-4xl text-rating mt-1 leading-none">
+                <p
+                  className="font-display text-4xl mt-1 leading-none font-extrabold"
+                  style={{ color: getRatingColor(album.rating) }}
+                >
                   {album.rating}
                 </p>
               </motion.div>

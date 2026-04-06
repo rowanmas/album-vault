@@ -5,6 +5,7 @@ import { useState, useEffect, useCallback } from "react";
 import { albums } from "@/data/albums";
 import { supabase } from "@/integrations/supabase/client";
 import { Slider } from "@/components/ui/slider";
+import { getRatingColor } from "@/lib/ratingColor";
 
 const getSessionId = () => {
   let id = localStorage.getItem("rating_session_id");
@@ -115,7 +116,10 @@ const AlbumPage = () => {
                 {album.artist}
               </p>
               <div className="flex items-baseline gap-2">
-                <span className="font-display text-7xl text-rating leading-none">
+                <span
+                  className="font-display text-7xl leading-none font-extrabold"
+                  style={{ color: getRatingColor(album.rating) }}
+                >
                   {album.rating}
                 </span>
                 <span className="font-body text-sm text-muted-foreground">/10</span>
@@ -139,7 +143,10 @@ const AlbumPage = () => {
             </h2>
             <div className="max-w-md">
               <div className="flex items-baseline gap-3 mb-4">
-                <span className="font-display text-5xl text-rating leading-none">
+                <span
+                  className="font-display text-5xl leading-none font-extrabold"
+                  style={{ color: getRatingColor(sliderValue) }}
+                >
                   {sliderValue.toFixed(1)}
                 </span>
                 <span className="font-body text-sm text-muted-foreground">/10</span>
