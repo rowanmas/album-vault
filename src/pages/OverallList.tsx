@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import { albums } from "@/data/albums";
+import { getRatingColor } from "@/lib/ratingColor";
 
 const OverallList = () => {
   const sorted = [...albums].sort((a, b) => b.rating - a.rating);
@@ -27,7 +28,7 @@ const OverallList = () => {
                 <p className="font-body text-sm font-semibold text-foreground truncate">{album.title}</p>
                 <p className="font-body text-xs text-muted-foreground truncate">{album.artist}</p>
               </div>
-              <span className="font-display text-3xl text-rating">{album.rating}</span>
+              <span className="font-display text-3xl font-extrabold" style={{ color: getRatingColor(album.rating) }}>{album.rating}</span>
             </Link>
           ))}
         </div>

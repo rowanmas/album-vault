@@ -14,8 +14,8 @@ export default {
     },
     extend: {
       fontFamily: {
-        display: ["Bebas Neue", "sans-serif"],
-        body: ["Space Grotesk", "sans-serif"],
+        display: ["Outfit", "sans-serif"],
+        body: ["Nunito", "sans-serif"],
       },
       colors: {
         border: "hsl(var(--border))",
