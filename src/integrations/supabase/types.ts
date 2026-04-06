@@ -38,6 +38,27 @@ export type Database = {
         }
         Relationships: []
       }
+      album_suggestions: {
+        Row: {
+          album_name: string
+          artist_name: string
+          created_at: string
+          id: string
+        }
+        Insert: {
+          album_name: string
+          artist_name: string
+          created_at?: string
+          id?: string
+        }
+        Update: {
+          album_name?: string
+          artist_name?: string
+          created_at?: string
+          id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
