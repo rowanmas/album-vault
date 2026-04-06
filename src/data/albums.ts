@@ -22,7 +22,7 @@ export const albums: Album[] = [
     title: "Christopher Cross",
     artist: "Christopher Cross",
     rating: 8.4,
-    cover: Christopher_cross,
+    cover: album1,
     genre: "Soft Rock",
     releaseYear: 1979,
     review:
