@@ -1,13 +1,18 @@
 import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
-import { Menu, ChevronLeft, ChevronRight } from "lucide-react";
+import { Menu, ChevronLeft, ChevronRight, Instagram, Send } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import logo from "@/assets/logo.png";
 import { albums } from "@/data/albums";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
 
 const Index = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const [albumName, setAlbumName] = useState("");
+  const [artistName, setArtistName] = useState("");
+  const [submitting, setSubmitting] = useState(false);
 
   const scroll = (dir: "left" | "right") => {
     if (scrollRef.current) {
@@ -19,8 +24,26 @@ const Index = () => {
     }
   };
 
+  const handleSuggest = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!albumName.trim() || !artistName.trim()) return;
+    setSubmitting(true);
+    try {
+      await supabase.from("album_suggestions").insert({
+        album_name: albumName.trim(),
+        artist_name: artistName.trim(),
+      });
+      toast.success("Thanks! Your suggestion has been submitted.");
+      setAlbumName("");
+      setArtistName("");
+    } catch {
+      toast.error("Something went wrong. Try again.");
+    }
+    setSubmitting(false);
+  };
+
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen bg-background text-foreground flex flex-col">
       {/* Nav */}
       <nav className="relative flex items-center justify-between px-6 py-4">
         <div className="relative z-50">
@@ -67,7 +90,7 @@ const Index = () => {
       </div>
 
       {/* Carousel */}
-      <div className="relative px-4 md:px-12 pb-20">
+      <div className="relative px-4 md:px-12 pb-20 flex-1">
         <div className="flex items-center justify-between mb-6 px-2">
           <h2 className="font-display text-2xl md:text-3xl text-foreground tracking-wider">
             RECENT REVIEWS
@@ -127,6 +150,78 @@ const Index = () => {
           ))}
         </div>
       </div>
+
+      {/* Footer: Suggest + Socials */}
+      <footer className="border-t border-border bg-card/50 px-6 py-12">
+        <div className="max-w-4xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-12">
+            {/* Suggestion Form */}
+            <div>
+              <h3 className="font-display text-2xl text-foreground tracking-wider mb-2">
+                SUGGEST AN ALBUM
+              </h3>
+              <p className="font-body text-sm text-muted-foreground mb-6">
+                Want me to review something? Drop it here.
+              </p>
+              <form onSubmit={handleSuggest} className="space-y-4">
+                <input
+                  type="text"
+                  placeholder="Album name"
+                  value={albumName}
+                  onChange={(e) => setAlbumName(e.target.value)}
+                  className="w-full px-4 py-3 bg-background border border-border rounded-md font-body text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary"
+                  required
+                />
+                <input
+                  type="text"
+                  placeholder="Artist name"
+                  value={artistName}
+                  onChange={(e) => setArtistName(e.target.value)}
+                  className="w-full px-4 py-3 bg-background border border-border rounded-md font-body text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary"
+                  required
+                />
+                <button
+                  type="submit"
+                  disabled={submitting}
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground font-body text-sm rounded-md hover:opacity-90 transition-opacity disabled:opacity-50"
+                >
+                  <Send className="w-4 h-4" />
+                  {submitting ? "Sending..." : "Submit"}
+                </button>
+              </form>
+            </div>
+
+            {/* Socials */}
+            <div className="flex flex-col justify-center md:items-end">
+              <h3 className="font-display text-2xl text-foreground tracking-wider mb-6">
+                FOLLOW
+              </h3>
+              <div className="flex flex-col gap-4">
+                <a
+                  href="https://instagram.com/rowanmastrangelo"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-3 font-body text-secondary-foreground hover:text-foreground transition-colors"
+                >
+                  <Instagram className="w-5 h-5" />
+                  @rowanmastrangelo
+                </a>
+                <a
+                  href="https://x.com/mastrangeloPXP"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-3 font-body text-secondary-foreground hover:text-foreground transition-colors"
+                >
+                  <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                  </svg>
+                  @mastrangeloPXP
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };
