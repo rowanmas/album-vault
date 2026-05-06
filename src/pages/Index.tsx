@@ -2,7 +2,7 @@ import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { Menu, ChevronLeft, ChevronRight, Instagram, Send } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import logo from "@/assets/logo.png";
+import logo from "@/assets/logo.svg";
 import { albums } from "@/data/albums";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
