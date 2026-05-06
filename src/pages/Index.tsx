@@ -144,6 +144,8 @@ const Index = () => {
               key={album.id}
               to={`/album/${album.id}`}
               className="flex-shrink-0 w-56 md:w-64 group snap-start"
+              onMouseEnter={() => setHoveredCover(album.cover)}
+              onMouseLeave={() => setHoveredCover(null)}
             >
               <motion.div
                 whileHover={{ y: -8 }}
