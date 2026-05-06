@@ -14,6 +14,7 @@ const Index = () => {
   const [albumName, setAlbumName] = useState("");
   const [artistName, setArtistName] = useState("");
   const [submitting, setSubmitting] = useState(false);
+  const [hoveredCover, setHoveredCover] = useState<string | null>(null);
 
   const scroll = (dir: "left" | "right") => {
     if (scrollRef.current) {
