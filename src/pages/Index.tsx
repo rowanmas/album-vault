@@ -211,7 +211,7 @@ const Index = () => {
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground font-body text-sm rounded-md hover:opacity-90 transition-opacity disabled:opacity-50"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground font-body text-sm rounded-md hover:bg-white hover:text-background transition-colors disabled:opacity-50"
                 >
                   <Send className="w-4 h-4" />
                   {submitting ? "Sending..." : "Submit"}
