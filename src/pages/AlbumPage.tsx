@@ -74,6 +74,8 @@ const AlbumPage = () => {
 
   useEffect(() => {
     fetchComments();
+    const savedName = localStorage.getItem("comment_author_name");
+    if (savedName) setCommentName(savedName);
   }, [fetchComments]);
 
   const handlePostComment = async (e: React.FormEvent) => {
