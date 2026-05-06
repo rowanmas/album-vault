@@ -2,7 +2,7 @@ import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { Menu, ChevronLeft, ChevronRight, Instagram, Send } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import logo from "@/assets/logo.png";
+import logo from "@/assets/logo.svg";
 import { albums } from "@/data/albums";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
@@ -14,6 +14,7 @@ const Index = () => {
   const [albumName, setAlbumName] = useState("");
   const [artistName, setArtistName] = useState("");
   const [submitting, setSubmitting] = useState(false);
+  const [hoveredCover, setHoveredCover] = useState<string | null>(null);
 
   const scroll = (dir: "left" | "right") => {
     if (scrollRef.current) {
@@ -44,7 +45,28 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background text-foreground flex flex-col">
+    <div className="min-h-screen bg-background text-foreground flex flex-col relative overflow-hidden">
+      {/* Hover background */}
+      <AnimatePresence>
+        {hoveredCover && (
+          <motion.div
+            key={hoveredCover}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.6 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}
+            className="fixed inset-0 z-0 pointer-events-none"
+            style={{
+              backgroundImage: `url(${hoveredCover})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              filter: "blur(80px) saturate(1.4)",
+              transform: "scale(1.2)",
+            }}
+          />
+        )}
+      </AnimatePresence>
+      <div className="relative z-10 flex flex-col flex-1">
       {/* Nav */}
       <nav className="relative flex items-center justify-between px-6 py-4">
         <div className="relative z-50">
@@ -122,6 +144,8 @@ const Index = () => {
               key={album.id}
               to={`/album/${album.id}`}
               className="flex-shrink-0 w-56 md:w-64 group snap-start"
+              onMouseEnter={() => setHoveredCover(album.cover)}
+              onMouseLeave={() => setHoveredCover(null)}
             >
               <motion.div
                 whileHover={{ y: -8 }}
@@ -187,7 +211,7 @@ const Index = () => {
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground font-body text-sm rounded-md hover:opacity-90 transition-opacity disabled:opacity-50"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground font-body text-sm rounded-md hover:bg-white hover:text-background transition-colors disabled:opacity-50"
                 >
                   <Send className="w-4 h-4" />
                   {submitting ? "Sending..." : "Submit"}
@@ -226,6 +250,7 @@ const Index = () => {
           </div>
         </div>
       </footer>
+      </div>
     </div>
   );
 };
