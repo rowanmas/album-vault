@@ -45,7 +45,28 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background text-foreground flex flex-col">
+    <div className="min-h-screen bg-background text-foreground flex flex-col relative overflow-hidden">
+      {/* Hover background */}
+      <AnimatePresence>
+        {hoveredCover && (
+          <motion.div
+            key={hoveredCover}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.6 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}
+            className="fixed inset-0 z-0 pointer-events-none"
+            style={{
+              backgroundImage: `url(${hoveredCover})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              filter: "blur(80px) saturate(1.4)",
+              transform: "scale(1.2)",
+            }}
+          />
+        )}
+      </AnimatePresence>
+      <div className="relative z-10 flex flex-col flex-1">
       {/* Nav */}
       <nav className="relative flex items-center justify-between px-6 py-4">
         <div className="relative z-50">
