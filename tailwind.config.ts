@@ -14,8 +14,8 @@ export default {
     },
     extend: {
       fontFamily: {
-        display: ["Outfit", "sans-serif"],
-        body: ["Nunito", "sans-serif"],
+        display: ["'Special Elite'", "'Courier Prime'", "monospace"],
+        body: ["'Courier Prime'", "'Courier New'", "monospace"],
       },
       colors: {
         border: "hsl(var(--border))",
