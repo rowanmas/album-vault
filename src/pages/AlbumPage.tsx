@@ -62,6 +62,37 @@ const AlbumPage = () => {
     fetchRatings();
   }, [fetchRatings]);
 
+  const fetchComments = useCallback(async () => {
+    if (!id) return;
+    const { data } = await supabase
+      .from("album_comments")
+      .select("id, author_name, content, created_at")
+      .eq("album_id", id)
+      .order("created_at", { ascending: false });
+    if (data) setComments(data as Comment[]);
+  }, [id]);
+
+  useEffect(() => {
+    fetchComments();
+  }, [fetchComments]);
+
+  const handlePostComment = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!id || !commentName.trim() || !commentText.trim()) return;
+    setPostingComment(true);
+    const { error } = await supabase.from("album_comments").insert({
+      album_id: id,
+      author_name: commentName.trim(),
+      content: commentText.trim(),
+    });
+    if (!error) {
+      setCommentText("");
+      localStorage.setItem("comment_author_name", commentName.trim());
+      fetchComments();
+    }
+    setPostingComment(false);
+  };
+
   const handleSubmit = async () => {
     if (!id) return;
     const sessionId = getSessionId();
