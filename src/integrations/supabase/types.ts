@@ -14,6 +14,30 @@ export type Database = {
   }
   public: {
     Tables: {
+      album_comments: {
+        Row: {
+          album_id: string
+          author_name: string
+          content: string
+          created_at: string
+          id: string
+        }
+        Insert: {
+          album_id: string
+          author_name: string
+          content: string
+          created_at?: string
+          id?: string
+        }
+        Update: {
+          album_id?: string
+          author_name?: string
+          content?: string
+          created_at?: string
+          id?: string
+        }
+        Relationships: []
+      }
       album_ratings: {
         Row: {
           album_id: string
