@@ -16,6 +16,13 @@ const getSessionId = () => {
   return id;
 };
 
+type Comment = {
+  id: string;
+  author_name: string;
+  content: string;
+  created_at: string;
+};
+
 const AlbumPage = () => {
   const { id } = useParams();
   const album = albums.find((a) => a.id === id);
@@ -24,6 +31,10 @@ const AlbumPage = () => {
   const [totalRatings, setTotalRatings] = useState(0);
   const [submitted, setSubmitted] = useState(false);
   const [sliderValue, setSliderValue] = useState(5);
+  const [comments, setComments] = useState<Comment[]>([]);
+  const [commentName, setCommentName] = useState("");
+  const [commentText, setCommentText] = useState("");
+  const [postingComment, setPostingComment] = useState(false);
 
   const fetchRatings = useCallback(async () => {
     if (!id) return;
