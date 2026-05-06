@@ -39,8 +39,8 @@
     --rating: 38 90% 55%;
     --rating-glow: 38 100% 65%;
 
-    --font-display: 'Outfit', sans-serif;
-    --font-body: 'Nunito', sans-serif;
+    --font-display: 'Special Elite', 'Courier Prime', monospace;
+    --font-body: 'Courier Prime', 'Courier New', monospace;
   }
 }
 
