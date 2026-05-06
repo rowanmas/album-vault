@@ -228,9 +228,56 @@ const AlbumPage = () => {
             <h2 className="font-display text-2xl text-foreground mb-6 tracking-wider">
               COMMENTS
             </h2>
-            <p className="font-body text-sm text-muted-foreground italic">
-              No comments yet. Check back soon.
-            </p>
+
+            <form onSubmit={handlePostComment} className="space-y-3 mb-8 max-w-xl">
+              <input
+                type="text"
+                placeholder="Your name"
+                value={commentName}
+                onChange={(e) => setCommentName(e.target.value)}
+                className="w-full px-4 py-2 bg-background border border-border rounded-md font-body text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary"
+                required
+              />
+              <textarea
+                placeholder="Leave a comment..."
+                value={commentText}
+                onChange={(e) => setCommentText(e.target.value)}
+                rows={3}
+                className="w-full px-4 py-2 bg-background border border-border rounded-md font-body text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary resize-none"
+                required
+              />
+              <button
+                type="submit"
+                disabled={postingComment}
+                className="px-6 py-2 bg-primary text-primary-foreground font-body text-sm rounded-md hover:bg-white hover:text-background transition-colors disabled:opacity-50"
+              >
+                {postingComment ? "Posting..." : "Post Comment"}
+              </button>
+            </form>
+
+            {comments.length === 0 ? (
+              <p className="font-body text-sm text-muted-foreground italic">
+                No comments yet. Be the first.
+              </p>
+            ) : (
+              <div className="space-y-4 max-w-xl">
+                {comments.map((c) => (
+                  <div key={c.id} className="border border-border rounded-md p-4 bg-card/50">
+                    <div className="flex items-baseline justify-between mb-2">
+                      <span className="font-display text-sm text-foreground tracking-wider">
+                        {c.author_name}
+                      </span>
+                      <span className="font-body text-xs text-muted-foreground">
+                        {new Date(c.created_at).toLocaleDateString()}
+                      </span>
+                    </div>
+                    <p className="font-body text-sm text-secondary-foreground whitespace-pre-line">
+                      {c.content}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         </motion.div>
       </div>
