@@ -109,7 +109,7 @@ const Index = () => {
       {/* Logo */}
       <div className="flex justify-center py-8">
         <Link to="/">
-          <img src={logo} alt="The Review" className="h-24 md:h-32 object-contain" />
+          <img src={logo} alt="The Review" className="h-48 md:h-64 object-contain" />
         </Link>
       </div>
 
