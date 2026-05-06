@@ -107,7 +107,7 @@ const Index = () => {
       </nav>
 
       {/* Logo */}
-      <div className="flex justify-center py-8">
+      <div className="flex justify-center pt-2 pb-0">
         <Link to="/">
           <img src={logo} alt="The Review" className="h-48 md:h-64 object-contain" />
         </Link>
