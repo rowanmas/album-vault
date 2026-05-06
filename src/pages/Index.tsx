@@ -1,8 +1,9 @@
 import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
-import { Menu, ChevronLeft, ChevronRight, Instagram, Send } from "lucide-react";
+import { ChevronLeft, ChevronRight, Instagram, Send } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import logo from "@/assets/logo.svg";
+import menuIcon from "@/assets/menu-icon.svg";
 import { albums } from "@/data/albums";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
@@ -74,7 +75,7 @@ const Index = () => {
             onClick={() => setMenuOpen(!menuOpen)}
             className="p-2 rounded-md hover:bg-secondary transition-colors"
           >
-            <Menu className="w-6 h-6 text-foreground" />
+            <img src={menuIcon} alt="Menu" className="w-10 h-10" />
           </button>
           <AnimatePresence>
             {menuOpen && (
@@ -108,7 +109,7 @@ const Index = () => {
       {/* Logo */}
       <div className="flex justify-center py-8">
         <Link to="/">
-          <img src={logo} alt="The Review" className="h-24 md:h-32 object-contain" />
+          <img src={logo} alt="The Review" className="h-48 md:h-64 object-contain" />
         </Link>
       </div>
 
