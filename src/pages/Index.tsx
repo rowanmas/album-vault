@@ -75,7 +75,7 @@ const Index = () => {
             onClick={() => setMenuOpen(!menuOpen)}
             className="p-2 rounded-md hover:bg-secondary transition-colors"
           >
-            <Menu className="w-6 h-6 text-foreground" />
+            <img src={menuIcon} alt="Menu" className="w-10 h-10" />
           </button>
           <AnimatePresence>
             {menuOpen && (
